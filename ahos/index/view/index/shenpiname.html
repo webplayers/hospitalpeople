@@ -1,0 +1,136 @@
+{include file="common:header" /}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            请休假
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">岗位查看</a></li>
+            <li class="active">增加岗位</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">菜单</h3>
+
+                        <div class="box-tools">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body no-padding">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="{:url('index/index/formqingxiu')}"><i class="fa fa-inbox"></i>
+                                提交申请
+                                <span class="label label-primary pull-right">{$tijiaojiacount}</span></a></li>
+                            <li class="active"><a href="{:url('index/index/qingxiuneed')}"><i class="fa fa-filter"></i> 需要审批
+                                <span class="label label-warning pull-right">{$needjiacount}</span></a>
+                            </li>
+                            <li><a href="{:url('index/index/qingxiuend')}"><i class="fa fa-check-square-o"></i> 已通过 <span
+                                    class="label label-info pull-right">{$endjiacount}</span></a></li>
+                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i class="fa fa-calendar-check-o"></i> 已销假
+                                <span class="label label-primary pull-right">{$xiaojiacount}</span></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /. box -->
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">回收站</h3>
+
+                        <div class="box-tools">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body no-padding">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="{:url('index/index/qingxiurefuse')}"><i class="fa fa-circle-o text-red"></i> 未通过<span
+                                    class="label label-danger pull-right">{$refusejiacount}</span></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <div class="col-md-9">
+                <div class="box box-info">
+                    <div class="box-body">
+                        <form id="form1" class="form-horizontal bv-form" autocomplete="off" onsubmit="return false"
+                              action="#" method="post">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label">审批结果</label>
+                                    <div class="col-xs-5">
+                                        <select class="form-control" name="jia_st">
+                                            <option value="3">通过</option>
+                                            <option value="0">不通过</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label">附加说明</label>
+                                    <div class="col-xs-5">
+                                        <textarea required="required" class="form-control" id="motivation"
+                                                  name="jia_guochen"
+                                                  placeholder="审批说明"></textarea>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="jia_id" value="{$jia_id}">
+                            </div>
+                            <div class="col-xs-12 text-center" style="border-top: 1px solid #ddd;padding-top: 10px;">
+                                <button onclick="sub()" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;提交
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<script>
+    function show() {
+        window.location = "{:url('index/index/qingxiuneed')}";
+    }
+    function sub() {
+        if (!$("#motivation").val()) {
+            return;
+        }
+        modals.confirm('确认提交申请？', function () {
+//            modals.correct('申请已提交，请等待审核');
+            $.ajax({
+                //几个参数需要注意一下
+                type: "post",
+                url: "{:url('index/index/shenpiname')}",
+                dataType: 'text',
+                data: $('#form1').serialize(),
+                success: function (sd) {
+                    if (sd == '1') {
+                        modals.correct('审批成功，即将跳转列表。。。');
+                        setInterval("show()", 2000);
+                    } else {
+                        modals.error("未知原因，审批失败！");
+                    }
+                },
+                error: function (e, s) {
+                    modals.error("错误");
+                }
+            });
+        });
+    }
+</script>
+<!-- /.content-wrapper -->
+{include file="common:footer" /}

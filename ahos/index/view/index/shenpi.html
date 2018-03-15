@@ -1,0 +1,253 @@
+{include file="common:header" /}
+<link rel="stylesheet" href="__STATIC__/bower_components/fullcalendar/dist/fullcalendar.min.css">
+<link rel="stylesheet" href="__STATIC__/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            请假列表
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{:url('index/index/index')}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="{:url('index/index/shenpi')}">请假列表</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="box box-primary">
+                    <div class="box-body no-padding">
+                        <!-- THE CALENDAR -->
+                        <div id="calendar"></div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /. box -->
+            </div>
+            <div class="col-md-7">
+                <!-- /.box -->
+                <div class="box">
+                    <div class="box-header">
+                        <a type="button" class="btn"></a>
+                        <form action="#" method="post">
+                            <div class="col-xs-2">
+                                <input required="required" placeholder="开始时间" autocomplete="off"
+                                       onfocus="WdatePicker({ Date:'#F{ $dp.$D(\'%y-%M-%d\'}' })"
+                                       name="startdata"
+                                       class="form-control" data-format="yyyy-mm-dd" type="text">
+                            </div>
+                            <div class="col-xs-2">
+                                <input required="required" placeholder="结束时间" autocomplete="off"
+                                       onfocus="WdatePicker({ Date:'#F{ $dp.$D(\'%y-%M-%d\'}' })"
+                                       name="enddata"
+                                       class="form-control" data-format="yyyy-mm-dd" type="text">
+                            </div>
+                            <div class="col-xs-2">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>编号</th>
+                                <th>姓名</th>
+                                <th>所在科室</th>
+                                <th>类型</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>原因</th>
+                                <th>提交时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            <div class="modal modal-success fade" id="modal-success">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">审批详情</h4>
+                                        </div>
+                                        <div id="lunshen" class="modal-body">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline pull-left"
+                                                    data-dismiss="modal">关闭
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            {foreach name='jia' key='key' item='vo' }
+                            <?php switch($vo['jia_st'])
+                           {
+                            case '0':
+                            $st = '<span class="label label-danger">审核不通过</span>';
+                            break;
+                            case '1':
+                            $st = '<span class="label label-warning">正等待送审</span>';
+                            break;
+                            case '2':
+                            $st = '<span class="label label-primary">已提交审核</span>';
+                            break;
+                            case '3':
+                            $st = '<span class="label label-success">审核已通过</span>';
+                            break;
+                            case '4':
+                            $st = '<span class="label label-success">已销假</span>';
+                            break;
+                            default:
+                            $st = '<span class="label label-success">未知状态</span>';
+                            }
+                            ?>
+                            <tr>
+                                <td>{$vo['linpid']}</td>
+                                <td>{$vo['name']}</td>
+                                <td>{$vo['ks_name']}</td>
+                                <td>{$vo['jiastatus']}</td>
+                                <td>{$vo['startdata']}</td>
+                                <td>{$vo['enddata']}</td>
+                                <td>{$vo['reason']}</td>
+                                <td>{$vo['tijiaodata']}</td>
+                                <td>{$st}</td>
+                                <td>
+                                    <button onclick="lunqing({$vo['jia_id']})" type="button" class="btn btn-success"
+                                            data-toggle="modal"
+                                            data-target="#modal-success">
+                                        查看
+                                    </button>
+                                    <button onclick="songshen({$vo['jia_id']},{$vo['jia_st']})" type="button"
+                                            class="btn btn-success" data-toggle="modal">
+                                        送审
+                                    </button>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                        {:$jia->render()}
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{include file="common:footer" /}
+<!-- ./wrapper -->
+<script>
+    function show() {
+        window.location = "{:url('index/index/shenpi')}";
+    }
+    function songshen(a, b) {
+        if (b == '2') {
+            modals.error("已提交审核，请勿重复提交");
+        }
+        if (b == '4') {
+            modals.error("已销假，请勿重复提交");
+        }
+        if (b == '3') {
+            modals.error("审核已通过，请勿重复提交");
+        }
+        if (b == '0') {
+            modals.error("请求已被拒绝，不能继续提交");
+        }
+        if (b == '1') {
+            modals.confirm('请确保时间信息准确，确认提交？', function () {
+                $.ajax({
+                    //几个参数需要注意一下
+                    type: "post",
+                    url: "{:url('index/index/songshen')}",
+                    dataType: 'text',
+                    data: {
+                        jiaid: a,
+                        status: b
+                    },
+                    success: function (sd) {
+                        if (sd == '1') {
+                            modals.correct('送审成功，即将跳转列表。。。');
+                            setInterval("show()", 1000);
+                        } else {
+                            modals.error("未知原因，审批失败！");
+                        }
+                    },
+                    error: function (e, s) {
+                        modals.error("错误");
+                    }
+                });
+            });
+        }
+    }
+    $(function () {
+        $('#example1').DataTable();
+    })
+    function del() {
+        modals.confirm('确认删除？', function () {
+
+        });
+    }
+    function lunqing(id) {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "post",
+            url: "{:url('index/index/shenpisee')}",
+            dataType: 'text',
+            data: {
+                jiaid: id
+            },
+            success: function (sd) {
+                $('#lunshen').html("");
+                $('#lunshen').append(sd);
+            },
+            error: function (e, s) {
+                modals.error("错误");
+            }
+        });
+    }
+</script>
+<script src="__STATIC__/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="__STATIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="__STATIC__/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- Slimscroll -->
+<script src="__STATIC__/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="__STATIC__/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE for demo purposes -->
+<!-- fullCalendar -->
+<script src="__STATIC__/bower_components/moment/moment.js"></script>
+<script src="__STATIC__/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script>
+    $(function () {
+        $('#calendar').fullCalendar({
+            header    : {
+                left  : 'prev,next',
+                center: 'title',
+                right : 'month'
+            },
+            //Random default events
+            events    : {$kaoqing},
+            editable  : false,
+            droppable : false,
+            weekMode  : 'liquid',
+            weekNumberCalculation:'iso',
+            eventBackgroundColor:'red',
+            eventBorderColor:'#FFFFFF'
+        })
+    })
+</script>

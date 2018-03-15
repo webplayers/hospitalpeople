@@ -1,0 +1,135 @@
+{include file="common:header" /}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            临聘人员信息修改
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">人员管理</a></li>
+            <li class="active">临聘人员信息修改</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-body">
+                        <form id="form1" class="form-horizontal bv-form" onsubmit="return false" autocomplete="off"
+                              action="#" method="post">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">姓名</label>
+                                    <div class="col-xs-7">
+                                        <p class="form-control" disabled>{$peopleone['name']}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">修改登录密码</label>
+                                    <div class="col-xs-7">
+                                        <input value="{$peopleone['psw']}" name="psw" required="required"
+                                               type="password"
+                                               class="form-control" placeholder="请登录密码">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">性别</label>
+                                    <div class="col-xs-7">
+                                        <p class="form-control" disabled>{$peopleone['sex']}</p>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">年龄</label>
+                                    <div class="col-xs-7">
+                                        <p class="form-control" disabled>{$peopleone['age']}</p>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">学历</label>
+                                    <div class="col-xs-7">
+                                        <input value="{$peopleone['xueli']}" name="xueli" required="required"
+                                               type="text"
+                                               class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">科室</label>
+                                    <div class="col-xs-7">
+                                        <select name="jigouid" class="form-control">
+                                            {foreach name='keshi' key='key' item='vo' }
+                                            <?php switch($vo['ks_id'])
+                                            {
+                                            case $peopleone['jigouid']:
+                                            $st = 'selected="selected"';
+                                            break;
+                                            default:
+                                            $st = '';
+                                            }
+                                            ?>
+                                            <option {$st} value="{$vo['ks_id']}">{$vo['ks_name']}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">地址</label>
+                                    <div class="col-xs-7">
+                                        <input value="{$peopleone['address']}" name="address" required="required"
+                                               type="text" class="form-control" placeholder="请输入姓名">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">电话</label>
+                                    <div class="col-xs-7">
+                                        <input value="{$peopleone['phone']}" name="phone" required="required" type="tel"
+                                               class="form-control" placeholder="请输入姓名">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="id" value="{$peopleone['per_id']}">
+                            </div>
+                            <div class="col-xs-12 text-center"
+                                 style="border-top: 1px solid #ddd;padding-top: 10px;">
+                                <button onclick="sub()" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;提交
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<script>
+    function show() {
+        window.location = "{:url('index/people/people')}";
+    }
+    function sub() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "post",
+            url: "{:url('index/people/editpeople')}",
+            dataType: 'text',
+            data: $('#form1').serialize(),
+            success: function (sd) {
+                if (sd == '1') {
+                    modals.correct('修改成功，即将跳转人员列表。。。');
+                    setInterval("show()", 1000);
+                } else {
+                    modals.info("没有数据更新");
+                }
+            },
+            error: function (e, s) {
+                modals.error("错误");
+            }
+        });
+    }
+</script>
+<!-- /.content-wrapper -->
+{include file="common:footer" /}

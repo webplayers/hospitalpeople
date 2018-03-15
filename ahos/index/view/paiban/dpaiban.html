@@ -1,0 +1,337 @@
+{include file="common:header" /}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            {$pban['name']}
+            <small>{$pban['ks_name']}</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">首页</a></li>
+            <li class="active">排班</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-warning">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <form id="form1" role="form" action="" method="post" autocomplete="off" onsubmit="return false">
+                            <!-- select -->
+                            <div class="form-group col-md-12">
+                                <div class="form-group col-md-2">
+                                    <p class="form-control">{$pban['time1']}</p>
+                                    <input type="hidden" name="nameid" value="{$pban['per_id']}">
+                                    <input type="hidden" name="time1" value="{$pban['time1']}">
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="ta1" class="form-control">
+                                        <?php if($pban['ta1']){
+                                        $ta1='selected="selected"';
+                                        }else{
+                                           $ta1='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周日)</option>
+                                        <option {$ta1} value="1">班(周日)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="ta2" class="form-control">
+                                        <?php if($pban['ta2']){
+                                        $ta2='selected="selected"';
+                                        }else{
+                                           $ta2='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周一)</option>
+                                        <option {$ta2} value="1">班(周一)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="ta3" class="form-control">
+                                        <?php if($pban['ta3']){
+                                        $ta3='selected="selected"';
+                                        }else{
+                                           $ta3='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周二)</option>
+                                        <option {$ta3} value="1">班(周二)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="ta4" class="form-control">
+                                        <?php if($pban['ta4']){
+                                        $ta4='selected="selected"';
+                                        }else{
+                                           $ta4='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周三)</option>
+                                        <option {$ta4} value="1">班(周三)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="ta5" class="form-control">
+                                        <?php if($pban['ta5']){
+                                        $ta5='selected="selected"';
+                                        }else{
+                                           $ta5='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周四)</option>
+                                        <option {$ta5} value="1">班(周四)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="ta6" class="form-control">
+                                        <?php if($pban['ta6']){
+                                        $ta6='selected="selected"';
+                                        }else{
+                                           $ta6='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周五)</option>
+                                        <option {$ta6} value="1">班(周五)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <?php if($pban['ta7']){
+                                        $ta7='selected="selected"';
+                                        }else{
+                                           $ta7='';
+                                        }
+                                        ?>
+                                    <select name="ta7" class="form-control">
+                                        <option value="0">休(周六)</option>
+                                        <option {$ta7} value="1">班(周六)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="form-group col-md-2">
+                                    <p class="form-control">{$pban['time2']}</p>
+                                    <input type="hidden" name="time2" value="{$pban['time2']}">
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="tb1" class="form-control">
+                                        <?php if($pban['tb1']){
+                                        $tb1='selected="selected"';
+                                        }else{
+                                           $tb1='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周日)</option>
+                                        <option {$tb1} value="1">班(周日)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="tb2" class="form-control">
+                                        <?php if($pban['tb2']){
+                                        $tb2='selected="selected"';
+                                        }else{
+                                           $tb2='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周一)</option>
+                                        <option {$tb2} value="1">班(周一)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <?php if($pban['tb3']){
+                                        $tb3='selected="selected"';
+                                        }else{
+                                           $tb3='';
+                                        }
+                                        ?>
+                                    <select name="tb3" class="form-control">
+                                        <option value="0">休(周二)</option>
+                                        <option {$tb3} value="1">班(周二)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <?php if($pban['tb4']){
+                                        $tb4='selected="selected"';
+                                        }else{
+                                           $tb4='';
+                                        }
+                                        ?>
+                                    <select name="tb4" class="form-control">
+                                        <option value="0">休(周三)</option>
+                                        <option {$tb4} value="1">班(周三)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <?php if($pban['tb5']){
+                                        $tb5='selected="selected"';
+                                        }else{
+                                           $tb5='';
+                                        }
+                                        ?>
+                                    <select name="tb5" class="form-control">
+                                        <option value="0">休(周四)</option>
+                                        <option {$tb5} value="1">班(周四)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <?php if($pban['tb6']){
+                                        $tb6='selected="selected"';
+                                        }else{
+                                           $tb6='';
+                                        }
+                                        ?>
+                                    <select name="tb6" class="form-control">
+                                        <option value="0">休(周五)</option>
+                                        <option {$tb6} value="1">班(周五)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="tb7" class="form-control">
+                                        <?php if($pban['tb7']){
+                                        $tb7='selected="selected"';
+                                        }else{
+                                           $tb7='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周六)</option>
+                                        <option {$tb7} value="1">班(周六)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="form-group col-md-2">
+                                    <p class="form-control">{$pban['time3']}</p>
+                                    <input type="hidden" name="time3" value="{$pban['time3']}">
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="tc1" class="form-control">
+                                        <?php if($pban['tc1']){
+                                        $tc1='selected="selected"';
+                                        }else{
+                                           $tc1='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周日)</option>
+                                        <option {$tc1} value="1">班(周日)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="tc2" class="form-control">
+                                        <?php if($pban['tc2']){
+                                        $tc2='selected="selected"';
+                                        }else{
+                                           $tc2='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周一)</option>
+                                        <option {$tc2} value="1">班(周一)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="tc3" class="form-control">
+                                        <?php if($pban['tc3']){
+                                        $tc3='selected="selected"';
+                                        }else{
+                                           $tc3='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周二)</option>
+                                        <option {$tc3} value="1">班(周二)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="tc4" class="form-control">
+                                        <?php if($pban['tc4']){
+                                        $tc4='selected="selected"';
+                                        }else{
+                                           $tc4='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周三)</option>
+                                        <option {$tc4} value="1">班(周三)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="tc5" class="form-control">
+                                        <?php if($pban['tc5']){
+                                        $tc5='selected="selected"';
+                                        }else{
+                                           $tc5='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周四)</option>
+                                        <option {$tc5} value="1">班(周四)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="tc6" class="form-control">
+                                        <?php if($pban['tc6']){
+                                        $tc6='selected="selected"';
+                                        }else{
+                                           $tc6='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周五)</option>
+                                        <option {$tc6} value="1">班(周五)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="tc7" class="form-control">
+                                        <?php if($pban['tc7']){
+                                        $st='selected="selected"';
+                                        }else{
+                                           $st='';
+                                        }
+                                        ?>
+                                        <option value="0">休(周六)</option>
+                                        <option {$st} value="1">班(周六)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button onclick="sub()" type="button" class="btn btn-info pull-right">完成</button>
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<script>
+    function show(){
+        window.location = "{:url('index/paiban/paiban')}";
+    }
+    function sub(){
+        $.ajax({
+            //几个参数需要注意一下
+            type: "post",
+            url: "{:url('index/paiban/dpaiban')}",
+            dataType: 'text',
+            data: $('#form1').serialize(),
+            success: function (sd) {
+                modals.error(sd);
+                if (sd == '1') {
+                    modals.correct('排班成功，即将跳转请假列表。。。');
+                    setInterval("show()", 1000);
+                } else {
+                    modals.error("没有数据更新");
+                }
+            },
+            error: function (e, s) {
+                modals.error("错误");
+            }
+        });
+    }
+</script>
+{include file="common:footer" /}

@@ -1,0 +1,111 @@
+{include file="common:header" /}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            工资信息
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li class="active">人员管理</li>
+            <li class="active">工资信息</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">工资信息</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <div class="table-responsive mailbox-messages">
+                            <table class="table table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>编号</th>
+                                    <th>姓名</th>
+                                    <th>所在科室</th>
+                                    <th>基本工资</th>
+                                    <th>岗位津贴</th>
+                                    <th>生活补贴</th>
+                                    <th>养老保险</th>
+                                    <th>失业保险</th>
+                                    <th>社保</th>
+                                    <th>个人税</th>
+                                    <th>扣合计</th>
+                                    <th>实领工资</th>
+                                    <th>月份</th>
+                                    <th>操作</th>
+                                </tr>
+                                <tr>
+                                    <td>{$peopleone['linpid']}</td>
+                                    <td>{$peopleone['name']}</td>
+                                    <td>放射科</td>
+                                    <td>4526</td>
+                                    <td>2541</td>
+                                    <td>1562</td>
+                                    <td>114</td>
+                                    <td>125</td>
+                                    <td>135</td>
+                                    <td>142</td>
+                                    <td>628</td>
+                                    <td>8001</td>
+                                    <td>3</td>
+                                    <td>
+                                    <a href="{:url('index/daochu/gongzi')}"  type="button" class="btn btn-info btn-flat">工资条导出</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.mail-box-messages -->
+                    </div>
+                </div>
+                <!-- /. box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">工资变动</h3>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <div class="table-responsive mailbox-messages">
+                            <table class="table table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>变动时间</th>
+                                    <th>变动原因</th>
+                                    <th>原本金额</th>
+                                    <th>变动后金额</th>
+                                </tr>
+                                <tr>
+                                    <td>2018-03-05</td>
+                                    <td>加基本工资</td>
+                                    <td>3568</td>
+                                    <td>4526</td>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.mail-box-messages -->
+                    </div>
+                </div>
+                <!-- /. box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<!-- Page Script -->
+{include file="common:footer" /}

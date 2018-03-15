@@ -1,0 +1,158 @@
+{include file="common:header" /}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            周排班
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">首页</a></li>
+            <li class="active">周排班</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- /.box -->
+                <div class="box">
+                    <div class="box-header">
+                        <a type="button">&nbsp;</a>
+
+                        <form class="box-tools" action="#" method="post">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="searchname" class="form-control pull-right"
+                                       placeholder="Search">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>姓名</th>
+                                <th>所在科室</th>
+                                <th>时间段</th>
+                                <th>
+                                    周日<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 0) * 24 * 3600)); ?></th>
+                                <th>
+                                    周一<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 1) * 24 * 3600)); ?></th>
+                                <th>
+                                    周二<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 2) * 24 * 3600)); ?></th>
+                                <th>
+                                    周三<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 3) * 24 * 3600)); ?></th>
+                                <th>
+                                    周四<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 4) * 24 * 3600)); ?></th>
+                                <th>
+                                    周五<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 5) * 24 * 3600)); ?></th>
+                                <th>
+                                    周六<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 6) * 24 * 3600)); ?></th>
+                                <th>操作</th>
+                            </tr>
+                            {foreach name='ban' key='key' item='vo' }
+                            <tr>
+                                <td rowspan="3" style="line-height:600%">{$vo['name']}</td>
+                                <td rowspan="3" style="line-height:600%">{$vo['ks_name']}</td>
+                                <td>{$vo['time1']}</td>
+                                <td>{$vo['ta1']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['ta2']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['ta3']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['ta4']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['ta5']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['ta6']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['ta7']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td rowspan="3" style="line-height:600%"><a href="{:url('index/paiban/dpaiban',['name'=>$vo['nameid']])}" type="button" class="btn btn-info btn-flat" >排班</a></td>
+                            </tr>
+                            <tr>
+                                <td>{$vo['time2']}</td>
+                                <td>{$vo['tb1']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tb2']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tb3']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tb4']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tb5']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tb6']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tb7']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{$vo['time3']}</td>
+                                <td>{$vo['tc1']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tc2']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tc3']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tc4']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tc5']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tc6']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                                <td>{$vo['tc7']? '<span class="label label-success">班</span>' : '<span
+                                        class="label label-danger">休</span>'}
+                                </td>
+                            </tr>
+                            <tr><td>&nbsp;</td></tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                        {:$ban->render()}
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{include file="common:footer" /}
+<!-- ./wrapper -->
+<script>
+    $(function () {
+        $('#example1').DataTable();
+    })
+</script>

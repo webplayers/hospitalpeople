@@ -1,0 +1,243 @@
+{include file="common:header" /}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            {$people['name']}
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li class="active">临聘人员</li>
+            <li class="active">临聘人员详情</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">比例</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="chart-area" height="150" width="211"
+                                            style="width: 226px; height: 161px;"></canvas>
+                                </div>
+                                <!-- ./chart-responsive -->
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle-o text-red"></i>&nbsp; {$cun1}</li>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <li><i class="fa fa-circle-o text-success"></i>&nbsp;{$cun}</li>
+                                </ul>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <button onclick="wan({$people['per_id']})" class="btn btn-info">实习完成</button>
+                        <button class="btn btn-success">转正式工</button>
+                        <button class="btn btn-danger">辞退</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">近三周上班情况</h3>
+                </div>
+                <!-- /.box-header -->
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <th>
+                            周日<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 0) * 24 * 3600)); ?></th>
+                        <th>
+                            周一<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 1) * 24 * 3600)); ?></th>
+                        <th>
+                            周二<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 2) * 24 * 3600)); ?></th>
+                        <th>
+                            周三<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 3) * 24 * 3600)); ?></th>
+                        <th>
+                            周四<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 4) * 24 * 3600)); ?></th>
+                        <th>
+                            周五<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 5) * 24 * 3600)); ?></th>
+                        <th>
+                            周六<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) - 6) * 24 * 3600)); ?></th>
+                    </tr>
+                    <tr>
+                        <?php
+                            $w11='<span class="label label-danger">×</span>';$w12='<span class="label label-danger">×</span>';$w13='<span class="label label-danger">×</span>';$w14='<span class="label label-danger">×</span>';$w15='<span class="label label-danger">×</span>';$w16='<span class="label label-danger">×</span>';$w17='<span class="label label-danger">×</span>';
+                        $w21='<span class="label label-danger">×</span>';$w22='<span class="label label-danger">×</span>';$w23='<span class="label label-danger">×</span>';$w24='<span class="label label-danger">×</span>';$w25='<span class="label label-danger">×</span>';$w26='<span class="label label-danger">×</span>';$w27='<span class="label label-danger">×</span>';
+                        $w31='<span class="label label-danger">×</span>';$w32='<span class="label label-danger">×</span>';$w33='<span class="label label-danger">×</span>';$w34='<span class="label label-danger">×</span>';$w35='<span class="label label-danger">×</span>';$w36='<span class="label label-danger">×</span>';$w37='<span class="label label-danger">×</span>';
+                        ?>
+                        {foreach name='shangban' key='key' item='vo' }
+                        <?php
+                            if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) - 0) * 24 * 3600)))
+                            { $w11 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) - 1) * 24 * 3600)))
+                        { $w12 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) - 2) * 24 * 3600)))
+                        { $w13 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) - 3) * 24 * 3600)))
+                        { $w14 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) - 4) * 24 * 3600)))
+                        { $w15 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) - 5) * 24 * 3600)))
+                        { $w16 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) - 6) * 24 * 3600)))
+                        { $w17 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 1) * 24 * 3600)))
+                        { $w21 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 2) * 24 * 3600)))
+                        { $w22 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 3) * 24 * 3600)))
+                        { $w23 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 4) * 24 * 3600)))
+                        { $w24 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 5) * 24 * 3600)))
+                        { $w25 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 6) * 24 * 3600)))
+                        { $w26 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 7) * 24 * 3600)))
+                        { $w27 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 8) * 24 * 3600)))
+                        { $w31 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 9) * 24 * 3600)))
+                        { $w32 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 10) * 24 * 3600)))
+                        { $w33 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 11) * 24 * 3600)))
+                        { $w34 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 12) * 24 * 3600)))
+                        { $w35 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 13) * 24 * 3600)))
+                        { $w36 = '<span class="label label-success">班</span>';}
+                        if($shangban[$key]['dk_date']==date("Y-m-d", (time() - ((date("w") == 0 ? 7 : date("w")) + 14) * 24 * 3600)))
+                        { $w37 = '<span class="label label-success">班</span>';}
+
+
+                        ?>
+                        {/foreach}
+                        <td>{$w11}</td>
+                        <td>{$w12}</td>
+                        <td>{$w13}</td>
+                        <td>{$w14}</td>
+                        <td>{$w15}</td>
+                        <td>{$w16}</td>
+                        <td>{$w17}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            周日<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 7) * 24 * 3600)); ?></th>
+                        <th>
+                            周一<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 6) * 24 * 3600)); ?></th>
+                        <th>
+                            周二<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 5) * 24 * 3600)); ?></th>
+                        <th>
+                            周三<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 4) * 24 * 3600)); ?></th>
+                        <th>
+                            周四<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 3) * 24 * 3600)); ?></th>
+                        <th>
+                            周五<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 2) * 24 * 3600)); ?></th>
+                        <th>
+                            周六<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 1) * 24 * 3600)); ?></th>
+                    </tr>
+                    <tr>
+                        <td>{$w27}</td>
+                        <td>{$w26}</td>
+                        <td>{$w25}</td>
+                        <td>{$w24}</td>
+                        <td>{$w23}</td>
+                        <td>{$w22}</td>
+                        <td>{$w21}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            周日<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 14) * 24 * 3600)); ?></th>
+                        <th>
+                            周一<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 13) * 24 * 3600)); ?></th>
+                        <th>
+                            周二<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 12) * 24 * 3600)); ?></th>
+                        <th>
+                            周三<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 11) * 24 * 3600)); ?></th>
+                        <th>
+                            周四<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 10) * 24 * 3600)); ?></th>
+                        <th>
+                            周五<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 9) * 24 * 3600)); ?></th>
+                        <th>
+                            周六<?php echo date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 8) * 24 * 3600)); ?></th>
+                    </tr>
+                    <tr>
+                        <td>{$w37}</td>
+                        <td>{$w36}</td>
+                        <td>{$w35}</td>
+                        <td>{$w34}</td>
+                        <td>{$w33}</td>
+                        <td>{$w32}</td>
+                        <td>{$w31}</td>
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    </tbody>
+                </table>
+                <!-- /.box-body -->
+            </div>
+            <!-- /. box -->
+        </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<script>
+    function wan(data){
+        alert(data);
+    }
+</script>
+<script src="__STATIC__/bower_components/chart.js/Chart.js"></script>
+<script>
+    var doughnutData = [
+        {
+            value: {$cun},
+            color: "#00A65A",
+            highlight: "#00A65A",
+            label: "上班天数"
+        },
+        {
+            value: 21-{$cun},
+            color: "#F7464A",
+            highlight: "#FF5A5E",
+            label: "未上班天数"
+        }
+    ];
+
+    window.onload = function () {
+        var ctx = document.getElementById("chart-area").getContext("2d");
+        window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive: true});
+    };
+</script>
+<!-- /.content-wrapper -->
+<!-- Page Script -->
+{include file="common:footer" /}

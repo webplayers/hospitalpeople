@@ -1,0 +1,80 @@
+{include file="common:header" /}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            人员基本信息
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">人员基础信息管理</a></li>
+            <li class="active">人员基础信息</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- /.box -->
+                <div class="box">
+                    <div class="box-header">
+                        <a href="{:url('index/daochu/tuixiudaochu')}" type="button" class="btn btn-danger btn-flat">退休员工信息导出</a>
+
+                        <form class="box-tools" autocomplete="off"  action="#" method="post">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="tsearch" class="form-control pull-right"
+                                       placeholder="Search">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table id="example1" class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>人员编码</th>
+                                <th>姓名</th>
+                                <th>所属机构</th>
+                                <th>性别</th>
+                                <th>年龄(自动增长)</th>
+                                <th>通讯地址</th>
+                                <th>联系方式</th>
+                            </tr>
+                            {foreach name='zs' key='key' item='vo' }
+                            <tr>
+                                <td>{$vo['linpid']}</td>
+                                <td>{$vo['name']}</td>
+                                <td>{$vo['ks_name']}</td>
+                                <td>{$vo['sex']}</td>
+                                <td>{$vo['age']}</td>
+                                <td>{$vo['address']}</td>
+                                <td>{$vo['phone']}</td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                        {:$zs->render()}
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{include file="common:footer" /}
+<!-- ./wrapper -->
+<script>
+    $(function () {
+        $('#example1').DataTable();
+    })
+</script>

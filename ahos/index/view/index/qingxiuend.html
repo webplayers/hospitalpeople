@@ -1,0 +1,236 @@
+{include file="common:header" /}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            审核明细
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li class="active">审核列表</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">菜单</h3>
+
+                        <div class="box-tools">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body no-padding">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="{:url('index/index/formqingxiu')}"><i class="fa fa-inbox"></i>
+                                提交申请
+                                <span class="label label-primary pull-right">{$tijiaojiacount}</span></a></li>
+                            <li><a href="{:url('index/index/qingxiuneed')}"><i class="fa fa-filter"></i> 需要审批
+                                <span class="label label-warning pull-right">{$needjiacount}</span></a>
+                            </li>
+                            <li class="active"><a href="{:url('index/index/qingxiuend')}"><i class="fa fa-check-square-o"></i> 已通过 <span
+                                    class="label label-info pull-right">{$endjiacount}</span></a></li>
+                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i class="fa fa-calendar-check-o"></i> 已销假
+                                <span class="label label-primary pull-right">{$xiaojiacount}</span></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /. box -->
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">回收站</h3>
+
+                        <div class="box-tools">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body no-padding">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="{:url('index/index/qingxiurefuse')}"><i class="fa fa-circle-o text-red"></i> 未通过<span
+                                    class="label label-danger pull-right">{$refusejiacount}</span></a></li>
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"></h3>
+
+                        <div class="box-tools pull-right">
+                            <div class="has-feedback">
+                                <input type="text" class="form-control input-sm" placeholder="Search Mail">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <div class="table-responsive mailbox-messages">
+                            <table class="table table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>编号</th>
+                                    <th>请假人</th>
+                                    <th>所在科室</th>
+                                    <th>类型</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>事由</th>
+                                    <th>提交时间</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                <div class="modal modal-success fade" id="modal-success">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">审批详情</h4>
+                                            </div>
+                                            <div id="lunshen" class="modal-body">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline pull-left"
+                                                        data-dismiss="modal">关闭
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                {foreach name='jia' key='key' item='vo' }
+                                <?php switch($vo['jia_st'])
+                           {
+                            case '0':
+                            $st = '<span class="label label-danger">审核不通过</span>';
+                                break;
+                                case '1':
+                                $st = '<span class="label label-warning">正等待送审</span>';
+                                break;
+                                case '2':
+                                $st = '<span class="label label-primary">已提交审核</span>';
+                                break;
+                                case '3':
+                                $st = '<span class="label label-success">审核已通过</span>';
+                                break;
+                                default:
+                                $st = '<span class="label label-success">未知状态</span>';
+                                }
+                                ?>
+                                <tr>
+                                    <td>{$vo['linpid']}</td>
+                                    <td>{$vo['name']}</td>
+                                    <td>{$vo['ks_name']}</td>
+                                    <td>{$vo['jiastatus']}</td>
+                                    <td>{$vo['startdata']}</td>
+                                    <td>{$vo['enddata']}</td>
+                                    <td>{$vo['reason']}</td>
+                                    <td>{$vo['tijiaodata']}</td>
+                                    <td>{$st}</td>
+                                    <td>
+                                        <button onclick="lunqing({$vo['jia_id']})" type="button" class="btn btn-success" data-toggle="modal"
+                                                data-target="#modal-success">
+                                            查看
+                                        </button>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                            {:$jia->render()}
+                        </div>
+                        <!-- /.mail-box-messages -->
+                    </div>
+                </div>
+                <!-- /. box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<!-- Page Script -->
+<script>
+    function lunqing(id) {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "post",
+            url: "{:url('index/index/shenpisee')}",
+            dataType: 'text',
+            data: {
+                jiaid: id
+            },
+            success: function (sd) {
+                $('#lunshen').html("");
+                $('#lunshen').append(sd);
+            },
+            error: function (e, s) {
+                modals.error("错误");
+            }
+        });
+    }
+    $(function () {
+        //Enable iCheck plugin for checkboxes
+        //iCheck for checkbox and radio inputs
+        $('.mailbox-messages input[type="checkbox"]').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+        });
+
+        //Enable check and uncheck all functionality
+        $(".checkbox-toggle").click(function () {
+            var clicks = $(this).data('clicks');
+            if (clicks) {
+                //Uncheck all checkboxes
+                $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+                $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+            } else {
+                //Check all checkboxes
+                $(".mailbox-messages input[type='checkbox']").iCheck("check");
+                $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+            }
+            $(this).data("clicks", !clicks);
+        });
+
+        //Handle starring for glyphicon and font awesome
+        $(".mailbox-star").click(function (e) {
+            e.preventDefault();
+            //detect type
+            var $this = $(this).find("a > i");
+            var glyph = $this.hasClass("glyphicon");
+            var fa = $this.hasClass("fa");
+
+            //Switch states
+            if (glyph) {
+                $this.toggleClass("glyphicon-star");
+                $this.toggleClass("glyphicon-star-empty");
+            }
+
+            if (fa) {
+                $this.toggleClass("fa-star");
+                $this.toggleClass("fa-star-o");
+            }
+        });
+    });
+</script>
+{include file="common:footer" /}

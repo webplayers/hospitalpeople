@@ -1,0 +1,118 @@
+{include file="common:header" /}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            临聘人员信息录入
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">岗位查看</a></li>
+            <li class="active">增加岗位</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-body">
+                        <form id="form1" class="form-horizontal bv-form" onsubmit="return false" autocomplete="off" action="#" method="post">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">姓名</label>
+                                    <div class="col-xs-7">
+                                    <input value="测试姓名1" name="name" required="required" type="text" class="form-control" placeholder="请输入姓名">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">登录密码</label>
+                                    <div class="col-xs-7">
+                                        <input value="admin" name="psw" required="required" type="password" class="form-control" placeholder="请登录密码">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">性别</label>
+                                    <div class="col-xs-7">
+                                        <select name="sex" class="form-control">
+                                            <option value="男">男</option>
+                                            <option value="女">女</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">年龄</label>
+                                    <div class="col-xs-7">
+                                        <input value="26" name="age" required="required" type="number" min="0" max="150" class="form-control" placeholder="请输入姓名">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">学历</label>
+                                    <div class="col-xs-7">
+                                        <input value="本科" name="xueli" required="required" type="text" class="form-control" placeholder="请输入姓名">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">科室</label>
+                                    <div class="col-xs-7">
+                                        <select name="jigouid" class="form-control">
+                                            {foreach name='keshi' key='key' item='vo' }
+                                            <option value="{$vo['ks_id']}">{$vo['ks_name']}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">地址</label>
+                                    <div class="col-xs-7">
+                                        <input value="深圳市南山区**小区**栋*号" name="address" required="required" type="text" class="form-control" placeholder="请输入姓名">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">电话</label>
+                                    <div class="col-xs-7">
+                                        <input value="13652457487" name="phone" required="required" type="text" class="form-control" placeholder="请输入姓名">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 text-center" style="border-top: 1px solid #ddd;padding-top: 10px;">
+                                <button onclick="sub()" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;提交
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<script>
+    function show(){
+        window.location = "{:url('index/people/lingpin')}";
+    }
+    function sub(){
+        $.ajax({
+            //几个参数需要注意一下
+            type: "post",
+            url: "{:url('index/people/lingpientry')}",
+            dataType: 'text',
+            data: $('#form1').serialize(),
+            success: function (sd) {
+                if (sd == '1') {
+                    modals.correct('申请成功，即将跳转人员列表。。。');
+                    setInterval("show()", 1000);
+                } else {
+                    modals.error("未知原因，申请失败！");
+                }
+            },
+            error: function (e, s) {
+                modals.error("错误");
+            }
+        });
+    }
+</script>
+<!-- /.content-wrapper -->
+{include file="common:footer" /}

@@ -1,0 +1,247 @@
+{include file="common:header" /}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            科室列表
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">科室查看</a></li>
+            <li class="active">科室列表</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">科室人数比例情况</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="chart-area" height="150" width="211"
+                                            style="width: 226px; height: 161px;"></canvas>
+                                </div>
+                                <!-- ./chart-responsive -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">重要科室联系方式</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <ul class="products-list product-list-in-box">
+                            <li class="item">
+                                <div class="product-img">
+                                    <img src="__STATIC__/dist/img/default-50x50.gif" alt="Product Image">
+                                </div>
+                                <div class="product-info">
+                                    <a href="javascript:void(0)" class="product-title">麻醉科</a>
+                                    <span class="product-description">电话：5484789456</span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <img src="__STATIC__/dist/img/default-50x50.gif" alt="Product Image">
+                                </div>
+                                <div class="product-info">
+                                    <a href="javascript:void(0)" class="product-title">康复科</a>
+                                    <span class="product-description">电话：5484789456</span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <img src="__STATIC__/dist/img/default-50x50.gif" alt="Product Image">
+                                </div>
+                                <div class="product-info">
+                                    <a href="javascript:void(0)" class="product-title">药剂科</a>
+                                    <span class="product-description">电话：5484789456</span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <img src="__STATIC__/dist/img/default-50x50.gif" alt="Product Image">
+                                </div>
+                                <div class="product-info">
+                                    <a href="javascript:void(0)" class="product-title">放射科</a>
+                                    <span class="product-description">电话：5484789456</span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <img src="__STATIC__/dist/img/default-50x50.gif" alt="Product Image">
+                                </div>
+                                <div class="product-info">
+                                    <a href="javascript:void(0)" class="product-title">教务科</a>
+                                    <span class="product-description">电话：12344846489458</span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+            <div class="col-md-9">
+                <!-- /.box -->
+                <div class="box">
+                    <div class="box-header">
+                        <a href="{:url('form')}" type="button" class="btn btn-info btn-flat">增加科室</a>
+                        <a href="{:url('index/daochu/gangweixinxidaochu')}" type="button" class="btn btn-danger btn-flat">科室信息导出</a>
+                        <form id="form1" class="box-tools" action="#" method="post">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="likename" class="form-control pull-right"
+                                       placeholder="输入科室名">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>科室名称</th>
+                                <th>人数</th>
+                                <th>人数比例</th>
+                                <th>操作</th>
+                            </tr>
+                            {foreach name='keshi' key='key' item='vo' }
+                            <div class="modal modal-success fade" id="modal-success{$vo['ks_id']}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">科室描述</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>{$vo['des']}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline pull-left"
+                                                    data-dismiss="modal">关闭
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <div class="modal modal-success fade" id="modal-succes{$vo['ks_id']}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">任职条件</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>{$vo['req']}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline pull-left"
+                                                    data-dismiss="modal">关闭
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <tr>
+                                <td>{$vo['ks_id']}</td>
+                                <td>{$vo['ks_name']}</td>
+                                <td>{$vo['ks_count']}</td>
+                                <td><?php echo round($vo['ks_count']/$kssum*100,2); ?>%</td>
+                                <td>
+                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#modal-success{$vo['ks_id']}">
+                                        科室描述
+                                    </button>
+                                    <!-- /.modal -->
+                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#modal-succes{$vo['ks_id']}">
+                                        任职条件
+                                    </button>
+                                    <button onclick="xiu()" type="button" class="btn btn-info btn-flat">修改</button>
+                                    <button onclick="del()" type="button" class="btn btn-info btn-flat">删除</button>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                        {:$keshi->render()}
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<script src="__STATIC__/bower_components/chart.js/Chart.js"></script>
+<script>
+    var doughnutData = {$yuan};
+
+    window.onload = function () {
+        var ctx = document.getElementById("chart-area").getContext("2d");
+        window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive: true});
+    };
+</script>
+{include file="common:footer" /}
+<!-- ./wrapper -->
+<script>
+    $(function () {
+        $('#example1').DataTable();
+    })
+    function xiu() {
+        modals.confirm('确认修改？', function () {
+
+        });
+    }
+    function del() {
+        modals.confirm('敏感操作，请确认是否删除？', function () {
+
+        });
+    }
+</script>
