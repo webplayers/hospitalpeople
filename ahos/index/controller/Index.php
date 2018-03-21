@@ -8,11 +8,9 @@ use app\common\model\Htopjia;
 use app\common\model\Htopdaka;
 use think\Controller;
 use think\Db;
-use PHPExcel_IOFactory;
-use PHPExcel;
 
 
-class Index extends Common
+class Index extends Commons
 {
     /*主菜单*/
     public function index()
@@ -20,6 +18,12 @@ class Index extends Common
         $restmenu = (new Htopmenu())->getall();
         $this->assign('menu', $restmenu);
         return $this->fetch('index');
+    }
+    public function keshiguanli()
+    {
+        $restmenu = (new Htopmenu())->getall();
+        $this->assign('menu', $restmenu);
+        return $this->fetch('keshiguanli');
     }
 
     /*岗位列表*/

@@ -4,7 +4,7 @@ namespace app\index\controller;
 use think\Controller;
 use think\Request;
 
-class Common extends Controller
+class Commons extends Controller
 {
 
     public function __construct(Request $request = null)
