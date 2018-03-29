@@ -1,0 +1,27 @@
+<div class="trees well">
+    <ul>
+        {volist name='keshi' id='vos' }
+        <li>
+            <span><i class="icon-folder-open"></i>{$vos['ks_name']}</span>
+            {notempty name='$zkeshi'}
+            {foreach name='zkeshi' key='key' item='vo' }
+            {if $vos['ks_id']==$vo['ks_pid']}
+            <ul>
+                <li><span><i class="icon-leaf"></i>{$vo['ks_name']}</span></li>
+                {notempty name='$szkeshi'}
+                {volist name='$szkeshi' id='avo' }
+                {if $vo['ks_id']==$avo['ks_pid']}
+                <ul>
+                    <li><span><i class="icon-leaf"></i>{$avo['ks_name']}</span></li>
+                </ul>
+                {/if}
+                {/volist}
+                {/notempty}
+            </ul>
+            {/if}
+            {/foreach}
+            {/notempty}
+        </li>
+        {/volist}
+    </ul>
+</div>

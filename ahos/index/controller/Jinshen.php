@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2018-03-19
- * Time: 下午 14:46
- */
 namespace app\index\controller;
 use app\common\model\Htopmenu;
 use app\common\model\Htoppaiban;
@@ -12,12 +6,15 @@ use app\common\model\Htopkeshi;
 use think\Controller;
 use think\Db;
 
-class Attendance extends Common
+class Jinshen extends Common
 {
+    /*晋升首页*/
     public function index(){
+        $pos = Db::name('person')
+            ->alias('a')
+            ->join('htopkeshi b', 'b.ks_id= a.jigouid', 'LEFT')
+            ->paginate(20);
+        $this->assign('zs', $pos);
         return $this->fetch('index');
-    }
-    public function test(){
-        return $this->fetch('text');
     }
 }

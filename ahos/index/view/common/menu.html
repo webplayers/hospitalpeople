@@ -1,0 +1,45 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="__STATIC__/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>{:session('admin.admin_username')}</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+            </div>
+        </div>
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">菜单栏目</li>
+            {volist name='leftmenus' id='vos' }
+            <li class="treeview">
+                <a href="{:url($vos['lefturl'])}">
+                    <i class="fa {$vos['icon']}"></i> <span>{$vos['title']}</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                </a>
+                {notempty name='$leftzi'}
+                <ul class="treeview-menu">
+                    {volist name='$leftzi' id='vo' }
+                    {if $vos['id']==$vo['pid']}
+                    <li><a href="{:url($vo['lefturl'])}"><i class="fa fa-circle-o"></i>{$vo['title']}</a>
+                    </li>
+                    {/if}
+                    {/volist}
+                </ul>
+                {/notempty}
+            </li>
+            {/volist}
+            <li class="header">开发人员选项</li>
+            <li><a href="{:url('index/setting/lianxi')}"><i class="fa fa-circle-o text-red"></i> <span>联系开发人员</span></a>
+            </li>
+            <li><a href="{:url('index/setting/quse')}"><i class="fa fa-circle-o text-yellow"></i> <span>问题上报</span></a>
+            </li>
+            <li><a href="{:url('index/setting/aboutme')}"><i class="fa fa-circle-o text-aqua"></i> <span>关于我们</span></a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

@@ -1,0 +1,132 @@
+{include file="common:header" /}
+<link rel="stylesheet" href="__STATIC__/bower_components/fullcalendar/dist/fullcalendar.min.css">
+<link rel="stylesheet" href="__STATIC__/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            请假列表
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{:url('index/index/index')}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">晋升管理</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-5">
+                <p>晋升章程</p>
+                <div class="box box-primary">
+                    <div class="box-body no-padding">
+                        <h3>一、住院医师</h3>
+                       <br>
+                        要求医生从住院医师晋升至主治医师前，必须以“住院总医师”的身份从事医疗工作,其特点是：<br>
+                        24小时不离开病区及附近。<br>
+                        一般期限为1年时间。<br>
+                        在医院中，其地位高于一般的住院医师，但不及主治医师。<br>
+                        部分医院的住院总医师同时安排排班，代为执行“科主任秘书”或“行政科主任”的职能。<br>
+                        住院总医师，简称为“住院总”。<br>
+                        <br>
+                        <h3>二、主治医师</h3>
+                        <br>
+                        1、医学中专毕业，在县及以下基层医疗机构工作，取得医师资格后从事医师工作不少于七年；
+                        <br>
+                        2、医学大学专科毕业，取得医师资格后从事医师工作不少于六年；
+                        <br>
+                        3、医学大学本科毕业，取得医师资格后从事医师工作不少于五年；
+                        <br>
+                        4、医学大学本科毕业并取得与医学有关的第二学士学位，取得医师资格后从事医师工作不少于四年。
+                        <br>
+                        <h3>三、副主任医师</h3>
+                        <br>
+                        1、医学大学专科毕业，在县及以下基层医疗机构工作，从事主治医师工作不少于七年；
+                        <br>
+                        2、医学大学本科毕业，从事主治医师工作不少于五年；
+                        <br>
+                        3、取得临床医学硕士学位，从事主治医师工作不少于四年；
+                        <br>
+                        4、取得临床医学博士学位，从事主治医师工作不少于二年；
+                        <br>
+                        5、临床医学博士后人员在完成博士后研究工作、出博士后流动站前。
+                        <br>
+                        <h3>四、主任医师</h3>
+                        <br>
+                        医学大学本科毕业或取得学士以上学位，从事副主任医师工作不少于五年。
+                        <br>
+                        五、其他认定方式
+                        <br>
+                        符合下列有关条件，经考核合格，可认定主治医师任职资格：
+                        <br>
+                        1、取得临床医学硕士学位，从事医师工作不少于三年；
+                        <br>
+                        2、取得临床医学博士学位。
+                        <br>
+                        符合下列有关条件，申报副主任医师、主任医师任职资格不受上述学历和任职年限的限制：
+                        <br>
+                        1、获自然科学奖、国家发明奖、国家科技进步奖的主要完成人；
+                        <br>
+                        2、获省部级科技进步奖二等及以上奖的主要完成人。
+                        <br>
+                        <h3>六、外语能力要求</h3>
+                        <br>
+                        （一）主治医师、副主任医师、主任医师要掌握一门外语，并能通过临床医学专业外语职称等级考试，取得相应级别的合格证书。
+                        <br>
+                        （二）长期在基层医疗机构工作的人员，外语的要求可以根据实际工作需要适当放宽。
+                        <br>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /. box -->
+            </div>
+            <div class="col-md-7">
+                <p>晋升人员名单</p>
+                <!-- /.box -->
+                <div class="box">
+                    <div class="box-header">
+                        <a type="button" class="btn"></a>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>编号</th>
+                                <th>姓名</th>
+                                <th>所属科室</th>
+                                <th>考评开始时间</th>
+                                <th>晋升职称</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            {foreach name='zs' key='key' item='vo' }
+                            <tr>
+                                <td>{$vo['linpid']}</td>
+                                <td>{$vo['name']}</td>
+                                <td>{$vo['ks_name']}</td>
+                                <td>2018-03-20</td>
+                                <td><span class="label label-info">初级医师</span></td>
+                                <td><span class="label label-success">考核通过</span></td>
+                                <td onclick="modals.confirm('请确认是否晋升？', function () {
+modals.info('晋升成功');
+        });"><span class="label label-danger">确认晋升</span></td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                        {:$zs->render()}
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{include file="common:footer" /}

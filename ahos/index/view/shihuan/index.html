@@ -1,0 +1,160 @@
+{include file="common:header" /}
+<style type="text/css">
+    th {
+        text-align: center
+    }
+
+    td {
+        text-align: center
+    }
+</style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            业务办理
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">首页</a></li>
+            <li class="active">业务办理</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="panel panel-default panel-intro">
+                <div class="panel-heading">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#basic" data-toggle="tab" aria-expanded="true">事项办理</a></li>
+                        <li class=""><a href="#email" data-toggle="tab" aria-expanded="false">环节办理</a></li>
+                    </ul>
+                </div>
+
+                <div class="panel-body">
+                    <div id="myTabContent" class="tab-content">
+                        <div class="box-body no-padding tab-pane fade active in" id="basic">
+                            <div class="table-responsive mailbox-messages widget-body no-padding">
+                                <div class="col-md-3">
+                                    <div class="box-body no-padding">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a href="{:url('index/index/formqingxiu')}"><i
+                                                    class="fa fa-plus-square"></i>入职报道
+                                            </a></li>
+                                            <li><a href="{:url('index/index/qingxiuneed')}"><i
+                                                    class="fa fa-plus-square"></i> 请休假
+                                                <span class="label label-danger pull-right">39</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuend')}"><i
+                                                    class="fa fa-plus-square"></i> 销假 <span
+                                                    class="label label-danger pull-right">1</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 普通外出
+                                                <span class="label label-danger pull-right">2</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 普通外出销假
+                                            </a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 外出进修
+                                                <span class="label label-danger pull-right">8</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 外出进修销假
+                                            </a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 考勤
+                                                <span class="label label-danger pull-right">37</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 人员科室变动
+                                                <span class="label label-danger pull-right">3</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 中初级职称聘任
+                                                <span class="label label-danger pull-right">360</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 离职
+                                                <span class="label label-danger pull-right">1</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 专业技术考评
+                                            </a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 合同到期考核
+                                            </a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 职称聘用期满考核
+                                            </a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 医德医风考核
+                                            </a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 年度考核
+                                            </a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 系数晋升
+                                            </a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 用人计划
+                                                <span class="label label-danger pull-right">19</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-body no-padding tab-pane fade in" id="email">
+                            <div class="table-responsive mailbox-messages widget-body no-padding">
+                                <div class="col-md-3">
+                                    <div class="box-body no-padding">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 个人申报
+                                                </a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 科室申报
+                                                <span class="label label-danger pull-right">6</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 科室审核
+                                                <span class="label label-danger pull-right">3</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 科主任审批
+                                                <span class="label label-danger pull-right">27</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 护士长审批
+                                                <span class="label label-danger pull-right">12</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 工会审批
+                                                </a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 教研室审批
+                                                <span class="label label-danger pull-right">1</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 医务室审批
+                                                <span class="label label-danger pull-right">8</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 护理部审批
+                                                <span class="label label-danger pull-right">230</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 人事科审批
+                                                <span class="label label-danger pull-right">174</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 科教科审批
+                                                <span class="label label-danger pull-right">2</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 分管院领导审批
+                                                <span class="label label-danger pull-right">1</span></a></li>
+                                            <li><a href="{:url('index/index/qingxiuxiaojia')}"><i
+                                                    class="fa fa-plus-square"></i> 院长审批
+                                                <span class="label label-danger pull-right"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{include file="common:footer" /}

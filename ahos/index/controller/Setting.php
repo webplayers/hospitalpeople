@@ -5,7 +5,7 @@ use app\common\model\Htoppaiban;
 use app\common\model\Htopkeshi;
 use think\Controller;
 
-class Setting extends Controller
+class Setting extends Common
 {
     /*联系开发人员*/
     public function lianxi(){

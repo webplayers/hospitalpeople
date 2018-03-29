@@ -75,11 +75,7 @@
     <script type="text/javascript" src="__STATIC__/jquerytree/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            $('.trees li:has(ul)').addClass('parent_li').find(' > span');
-
-//                var childrens = $('.trees li.parent_li > span').parent('li.parent_li').find(' > ul > li');
-//                childrens.hide('fast');
-//                $('.trees li.parent_li > span').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+//            $('.trees li:has(ul)').addClass('parent_li').find(' > span');
 
             $('.trees li.parent_li > span').on('click', function (e) {
                 var children = $(this).parent('li.parent_li').find(' > ul > li');
@@ -425,27 +421,27 @@
                             </tr>
                             <tr>
                                 <td style="text-align:center">正式工</td>
-                                <td style="text-align:center">22</td>
-                                <td style="text-align:center">12</td>
-                                <td style="text-align:center">75</td>
-                                <td style="text-align:center">147</td>
-                                <td style="text-align:center">248</td>
-                                <td style="text-align:center">21</td>
-                                <td style="text-align:center">236</td>
+                                <td style="text-align:center">422</td>
+                                <td style="text-align:center">212</td>
+                                <td style="text-align:center">275</td>
+                                <td style="text-align:center">447</td>
+                                <td style="text-align:center">1248</td>
+                                <td style="text-align:center">221</td>
+                                <td style="text-align:center">336</td>
                                 <td style="text-align:center">0</td>
-                                <td style="text-align:center">761</td>
+                                <td style="text-align:center">3161</td>
                             </tr>
                             <tr>
                                 <td style="text-align:center">聘用人员</td>
-                                <td style="text-align:center">4</td>
-                                <td style="text-align:center">23</td>
-                                <td style="text-align:center">65</td>
-                                <td style="text-align:center">123</td>
-                                <td style="text-align:center">432</td>
-                                <td style="text-align:center">121</td>
                                 <td style="text-align:center">234</td>
+                                <td style="text-align:center">223</td>
+                                <td style="text-align:center">1265</td>
+                                <td style="text-align:center">323</td>
+                                <td style="text-align:center">432</td>
+                                <td style="text-align:center">321</td>
+                                <td style="text-align:center">534</td>
                                 <td style="text-align:center">0</td>
-                                <td style="text-align:center">1002</td>
+                                <td style="text-align:center">3332</td>
                             </tr>
                             <tr>
                                 <td style="text-align:center">返聘人员</td>
@@ -453,11 +449,11 @@
                                 <td style="text-align:center">0</td>
                                 <td style="text-align:center">0</td>
                                 <td style="text-align:center">0</td>
-                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">120</td>
                                 <td style="text-align:center">21</td>
                                 <td style="text-align:center">23</td>
                                 <td style="text-align:center">0</td>
-                                <td style="text-align:center">44</td>
+                                <td style="text-align:center">164</td>
                             </tr>
                             <tr>
                                 <td style="text-align:center">本院规培学院</td>
@@ -466,10 +462,10 @@
                                 <td style="text-align:center">0</td>
                                 <td style="text-align:center">0</td>
                                 <td style="text-align:center">0</td>
-                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">123</td>
                                 <td style="text-align:center">32</td>
                                 <td style="text-align:center">0</td>
-                                <td style="text-align:center">32</td>
+                                <td style="text-align:center">155</td>
                             </tr>
                             <tr>
                                 <td style="text-align:center">委培人员</td>
@@ -481,19 +477,19 @@
                                 <td style="text-align:center">12</td>
                                 <td style="text-align:center">23</td>
                                 <td style="text-align:center">5</td>
-                                <td style="text-align:center">34</td>
+                                <td style="text-align:center">40</td>
                             </tr>
                             <tr>
                                 <td style="text-align:center">合计</td>
-                                <td style="text-align:center">26</td>
-                                <td style="text-align:center">35</td>
-                                <td style="text-align:center">140</td>
-                                <td style="text-align:center">270</td>
-                                <td style="text-align:center">680</td>
-                                <td style="text-align:center">175</td>
-                                <td style="text-align:center">548</td>
+                                <td style="text-align:center">656</td>
+                                <td style="text-align:center">435</td>
+                                <td style="text-align:center">2540</td>
+                                <td style="text-align:center">770</td>
+                                <td style="text-align:center">1800</td>
+                                <td style="text-align:center">698</td>
+                                <td style="text-align:center">948</td>
                                 <td style="text-align:center">5</td>
-                                <td style="text-align:center">1873</td>
+                                <td style="text-align:center">6852</td>
                             </tr>
                             </tbody>
                         </table>
@@ -529,7 +525,26 @@
 <script src="__STATIC__/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="__STATIC__/bower_components/chart.js/Chart.js"></script>
 <script>
+
     $(function () {
+        $('.trees li:has(ul)').addClass('parent_li').find(' > span');
+
+//                var childrens = $('.trees li.parent_li > span').parent('li.parent_li').find(' > ul > li');
+//                childrens.hide('fast');
+//                $('.trees li.parent_li > span').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+
+        $('.trees li.parent_li > span').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(":visible")) {
+                children.hide('fast');
+                $(this).find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+            } else {
+                children.show('fast');
+                $(this).find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+            }
+            e.stopPropagation();
+        });
+
         var areaChartData = {
             labels  : ['正式工', '聘用人员', '返聘人员', '本院规培学员', '委培人员'],
             datasets: [
@@ -540,7 +555,7 @@
                     pointStrokeColor    : '#3A5FCD',
                     pointHighlightFill  : '#3A5FCD',
                     pointHighlightStroke: '#3A5FCD',
-                    data                : [22, 4, 0, 0, 0]
+                    data                : [422, 234, 0, 0, 0]
                 },
                 {
                     fillColor           : '#3CB371',
@@ -549,7 +564,7 @@
                     pointStrokeColor    : '#3CB371',
                     pointHighlightFill  : '#3CB371',
                     pointHighlightStroke: '#3CB371',
-                    data                : [12, 23 ,0, 0, 0]
+                    data                : [212, 223 ,0, 0, 0]
                 },
                 {
                     fillColor           : '#CD853F',
@@ -558,7 +573,7 @@
                     pointStrokeColor    : '#CD853F',
                     pointHighlightFill  : '#CD853F',
                     pointHighlightStroke: '#CD853F',
-                    data                : [75, 65, 0, 0, 0]
+                    data                : [275, 1265, 0, 0, 0]
                 },
                 {
                     fillColor           : '#CD3700',
@@ -567,7 +582,7 @@
                     pointStrokeColor    : '#CD3700',
                     pointHighlightFill  : '#CD3700',
                     pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data                : [147, 123, 0, 0, 0]
+                    data                : [447, 323, 0, 0, 0]
                 },
                 {
                     fillColor           : '#836FFF',
@@ -576,7 +591,7 @@
                     pointStrokeColor    : '#836FFF',
                     pointHighlightFill  : '#836FFF',
                     pointHighlightStroke: '#836FFF',
-                    data                : [248, 432, 40, 19, 86]
+                    data                : [248, 432, 120, 0, 0]
                 },
                 {
                     fillColor           : '#7CCD7C',
@@ -585,7 +600,7 @@
                     pointStrokeColor    : '#7CCD7C',
                     pointHighlightFill  : '#7CCD7C',
                     pointHighlightStroke: '#7CCD7C',
-                    data                : [21, 121, 21, 0, 12]
+                    data                : [221, 321, 21, 123, 12]
                 },
                 {
                     fillColor           : '#388E8E',
@@ -594,7 +609,7 @@
                     pointStrokeColor    : '#388E8E',
                     pointHighlightFill  : '#388E8E',
                     pointHighlightStroke: '#388E8E',
-                    data                : [236, 234, 23, 32, 23]
+                    data                : [336, 534, 23, 32, 23]
                 },
                 {
                     fillColor           : '#EE3B3B',

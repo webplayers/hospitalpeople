@@ -5,7 +5,7 @@ use app\common\model\Htoppaiban;
 use app\common\model\Htopkeshi;
 use think\Controller;
 
-class Paiban extends Controller
+class Paiban extends Common
 {
     public function paiban()
     {

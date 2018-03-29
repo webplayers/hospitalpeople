@@ -38,6 +38,7 @@
                         <table class="table table-hover">
                             <tbody>
                             <tr>
+                                <th>编号</th>
                                 <th>姓名</th>
                                 <th>所在科室</th>
                                 <th>时间段</th>
@@ -59,6 +60,7 @@
                             </tr>
                             {foreach name='ban' key='key' item='vo' }
                             <tr>
+                                <td rowspan="3" style="line-height:600%">{$vo['linpid']}</td>
                                 <td rowspan="3" style="line-height:600%">{$vo['name']}</td>
                                 <td rowspan="3" style="line-height:600%">{$vo['ks_name']}</td>
                                 <td>{$vo['time1']}</td>

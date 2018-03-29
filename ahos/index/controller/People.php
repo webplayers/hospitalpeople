@@ -6,7 +6,7 @@ use app\common\model\Htopdaka;
 use think\Controller;
 use think\Db;
 
-class People extends Controller
+class People extends Common
 {
     public function lingpin()
     {

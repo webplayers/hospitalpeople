@@ -1,7 +1,6 @@
 <?php
 namespace app\index\controller;
 
-use app\common\model\Hpeople;
 use app\common\model\Htopkeshi;
 use app\common\model\Htopmenu;
 use app\common\model\Htopjia;
@@ -10,7 +9,7 @@ use think\Controller;
 use think\Db;
 
 
-class Index extends Commons
+class Index extends Common
 {
     /*主菜单*/
     public function index()

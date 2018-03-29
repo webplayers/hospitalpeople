@@ -4,7 +4,7 @@ namespace app\index\controller;
 use think\Controller;
 use think\Db;
 
-class Renshi extends Controller
+class Renshi extends Common
 {
     public function zyjskh()
     {
