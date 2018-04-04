@@ -63,10 +63,12 @@ class Htopjia extends Model
     /*处理完成请假的数据*/
     public function endjia()
     {
+        $nameid=session('admin.id');
         $adList = Db::name('htopjia')
             ->alias('a')
             ->join('person b', 'b.per_id= a.nameid', 'LEFT')
             ->join('htopkeshi c','c.ks_id= b.jigouid','LEFT')
+            ->where('a.nameid',"$nameid")
             ->where('a.jia_st', '3')
             ->order('a.jia_id desc')
             ->paginate(10);
@@ -76,11 +78,13 @@ class Htopjia extends Model
     /*处理完成请假的数据*/
     public function xiaojia()
     {
+        $nameid=session('admin.id');
         $adList = Db::name('htopjia')
             ->alias('a')
             ->join('person b', 'b.per_id= a.nameid', 'LEFT')
             ->join('htopkeshi c','c.ks_id= b.jigouid','LEFT')
             ->where('a.jia_st', '4')
+            ->where('a.nameid',"$nameid")
             ->order('a.jia_id desc')
             ->paginate(10);
         return $adList;

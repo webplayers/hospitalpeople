@@ -14,22 +14,40 @@ use think\Controller;
 use think\Lang;
 use think\Request;
 use think\Db;
+use app\common\model\Htopjia;
+
 class Common extends Controller
 {
     protected function _initialize(){
-        $this->nbar();
         if (!session('admin.admin_username')) {
             $this->redirect('index/login/login');
         }
         $this->nbar();
         $this->keshis();
+        $this->message();
     }
+    /*左侧菜单栏选项*/
     protected function nbar(){
-        $postsList = Db::name('hr_leftmenu')
-            ->where('pid', 0)
-            ->order('weigh desc')
-            ->select();
-
+        $sessionid= session('admin.id');
+        $permession = Db::name('hr_permission')
+            ->where('ms_nameid',$sessionid)
+            ->field('ms_content')
+            ->find();
+        $data = ($permession['ms_content']);
+        $ss = explode(",",$data);
+        if(in_array("*",$ss)){
+            $postsList = Db::name('hr_leftmenu')
+                ->where('pid', 0)
+                ->order('weigh desc')
+                ->select();
+        }else{
+            $postsList = Db::name('hr_leftmenu')
+                ->where('pid', 0)
+                ->where('id','in',$ss)
+                ->order('weigh desc')
+                ->select();
+        }
+        $acc=null;
         foreach ($postsList as $key => $value) {
             // 左侧菜单权限
             $left = Db::name('hr_leftmenu')->where('pid',$value['id'])->select();
@@ -42,6 +60,7 @@ class Common extends Controller
         $this->assign("leftmenus",$postsList);
         $this->assign("leftzi",$acc);
     }
+    /*科室列表*/
     protected function keshis()
     {
         $postsListz = Db::name('htopkeshi')
@@ -69,6 +88,19 @@ class Common extends Controller
         $this->assign("keshi",$postsListz);
         $this->assign("zkeshi",$acc);
         $this->assign("szkeshi",$gaa);
+    }
+    /*信息处理个数*/
+    protected function message(){
+        $tijiaojiacount = (new Htopjia())->tijiaojiacount();
+        $needjiacount = (new Htopjia())->needjiacount();
+        $endjiacount = (new Htopjia())->endjiacount();
+        $refusejiacount = (new Htopjia())->refusejiacount();
+        $xiaojiacount = (new Htopjia())->xiaojiacount();
+        $this->assign('tijiaojiacount', $tijiaojiacount);
+        $this->assign('needjiacount', $needjiacount);
+        $this->assign('endjiacount', $endjiacount);
+        $this->assign('refusejiacount', $refusejiacount);
+        $this->assign('xiaojiacount', $xiaojiacount);
     }
 }
 // 应用公共文件

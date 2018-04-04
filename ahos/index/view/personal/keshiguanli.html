@@ -1,0 +1,44 @@
+{include file="common:header" /}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                医院人力资源管理系统
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+                <li class="active">首页</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                {foreach name='menu' key='key' item='vo' }
+                <div class="col-lg-2 col-xs-6">
+                    <!-- small box -->
+                    <?php  $url=$vo['topurl']; ?>
+                    <a href='{:url("$url")}' style="background-color: #E0E0E0;" class="small-box">
+                        <div class="inner">
+                            <div style="text-align: center">
+                                <img style="width: 40%" src="{$vo['topion']}">
+                            </div>
+                            <br>
+                            <p style="text-align: center;font-size: 25px;color: #0b650d;font-family: STHeiti">{$vo['topname']}</p>
+
+                            <!--<p>{$vo['topdes']}</p>-->
+                        </div>
+                        <!--<a href='{:url("$url")}' class="small-box-footer">详情  <i class="fa fa-arrow-circle-right"></i></a>-->
+                    </a>
+                </div>
+                {/foreach}
+                <!-- ./col -->
+            </div>
+            <!-- /.row -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+{include file="common:footer" /}

@@ -14,8 +14,13 @@ class Login extends Controller
             $res = (new Hpeople())->logins($data);
             if ($res['valid']) {
                 //说明登录成功
-                echo 1;
-                exit;
+                if(session('admin.dengji')<6){
+                    echo 1;
+                    exit;
+                }else{
+                    echo 2;
+                    exit;
+                }
             } else {
                 //说明登录失败
                 echo $res['msg'];

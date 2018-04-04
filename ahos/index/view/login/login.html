@@ -80,9 +80,13 @@
             },
             success:function(data){
                 if(data=='1'){
-                    window.location="{:url('index/index/index')}";
+                    window.location="{:url('index/index/keshiguanli')}";
                 }else{
-                    modals.error(data);
+                    if(data=='2'){
+                        window.location="{:url('index/index/index')}";
+                    }else{
+                        modals.error(data);
+                    }
                 }
             },
             error:function(a,b,c){

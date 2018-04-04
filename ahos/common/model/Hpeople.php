@@ -41,6 +41,7 @@ class Hpeople extends Model
             ->alias('a')
             ->join('htopkeshi b', 'b.ks_id= a.jigouid', 'LEFT')
             ->where('a.status', '<', 3)
+            ->order('a.per_id desc')
             ->paginate(10);
         return $postsList;
     }

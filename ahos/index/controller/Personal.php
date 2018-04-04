@@ -9,7 +9,7 @@ use think\Controller;
 use think\Db;
 
 
-class Index extends Common
+class Personal extends Common
 {
     /*主菜单*/
     public function index()
