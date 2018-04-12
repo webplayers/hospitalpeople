@@ -13,13 +13,14 @@ class Htopdaka extends Model
     /*存储人员信息*/
     public function saveone($data)
     {
-        $oneban = $this->save($data);//存储数据
+        $oneban = $this->save($data);
         return $oneban;
     }
     /*查找人员信息*/
     public function findall($data)
     {
-        $oneban = $this->where('dk_nameid',$data)->select();//存储数据
+        $da=date('Y-m-d', (time() - ((date('w') == 0 ? 7 : date('w')) + 14) * 24 * 3600));
+        $oneban = $this->where('dk_nameid',$data)->where('dk_date','>',$da)->select();
         return $oneban;
     }
 }

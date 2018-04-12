@@ -51,14 +51,14 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button onclick="sub()" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    <button type="submit" onclick="sub()" class="btn btn-primary btn-block btn-flat">登录</button>
                 </div>
                 <!-- /.col -->
             </div>
         <!-- /.social-auth-links -->
 
-        <a href="#">忘记密码</a><br>
-        <a href="register.html" class="text-center">注册</a>
+        <!--<a href="#">忘记密码</a><br>-->
+        <!--<a href="#" class="text-center">注册</a>-->
 
     </div>
     <!-- /.login-box-body -->
@@ -80,7 +80,7 @@
             },
             success:function(data){
                 if(data=='1'){
-                    window.location="{:url('index/index/keshiguanli')}";
+                    window.location="{:url('index/personal/keshiguanli')}";
                 }else{
                     if(data=='2'){
                         window.location="{:url('index/index/index')}";

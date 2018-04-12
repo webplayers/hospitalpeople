@@ -25,6 +25,7 @@ class Common extends Controller
         $this->nbar();
         $this->keshis();
         $this->message();
+        $this->keshi();
     }
     /*左侧菜单栏选项*/
     protected function nbar(){
@@ -101,6 +102,11 @@ class Common extends Controller
         $this->assign('endjiacount', $endjiacount);
         $this->assign('refusejiacount', $refusejiacount);
         $this->assign('xiaojiacount', $xiaojiacount);
+    }
+    /*科室信息*/
+    protected function keshi(){
+        $ks_name = Db::name('htopkeshi')->where('ks_pid','<>','0')->field('ks_id,ks_name')->select();
+        $this->assign("ks_name",$ks_name);
     }
 }
 // 应用公共文件

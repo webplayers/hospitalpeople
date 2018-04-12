@@ -81,7 +81,7 @@ class Hpeople extends Model
     /*存储人员信息*/
     public function saveone($data)
     {
-        $oneban = $this->save($data);//存储数据
+        $oneban = $this->insertGetId($data);//存储数据
         return $oneban;
     }
     /*更新信息*/

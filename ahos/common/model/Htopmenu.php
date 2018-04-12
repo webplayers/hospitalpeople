@@ -12,7 +12,7 @@ class Htopmenu extends Model
     public function getall()
     {
         $dengji=session('admin.dengji');
-        $allnenu = $this->where('meu_dengji','<=',$dengji)->select();//存储数据
+        $allnenu = $this->where('meu_dengji','=',$dengji)->select();//存储数据
         return $allnenu;
     }
 }

@@ -11,14 +11,6 @@ use think\Db;
 
 class Personal extends Common
 {
-    /*主菜单*/
-    public function index()
-    {
-        $restmenu = (new Htopmenu())->getall();
-        $this->assign('menu', $restmenu);
-        return $this->fetch('index');
-    }
-
     /*科室管理*/
     public function keshiguanli()
     {
@@ -27,29 +19,6 @@ class Personal extends Common
         return $this->fetch('keshiguanli');
     }
 
-    /*岗位列表*/
-    public function gangwei()
-    {
-        if (request()->isPost()) {
-            $data = input('post.');
-            $restkeshi = (new Htopkeshi())->findone($data['likename']);
-            $this->assign('keshi', $restkeshi);
-        } else {
-            $restkeshi = (new Htopkeshi())->getall();
-            $this->assign('keshi', $restkeshi);
-        }
-        $possun = Db::name('htopkeshi')->sum('ks_count');
-        $this->assign('kssum', $possun);
-        $pos = Db::name('htopkeshi')->field('ks_name as label,ks_count as value,ks_color as color,ks_color as highlight')->select();
-        $this->assign('yuan', json_encode($pos));
-        return $this->fetch('gangwei');
-    }
-
-    /*增加岗位*/
-    public function form()
-    {
-        return $this->fetch('form');
-    }
 
     /*请休提交*/
     public function qingxiu()
@@ -69,37 +38,6 @@ class Personal extends Common
         return $this->fetch('qingxiu');
     }
 
-    /*提交请休控制器*/
-    public function formqingxiu()
-    {
-        $res = (new Htopjia())->tijiaojia();
-        $this->assign('jia', $res);
-        return $this->fetch('formqingxiu');
-    }
-
-    /*需要处理请休控制器*/
-    public function qingxiuneed()
-    {
-        $res = (new Htopjia())->needjia();
-        $this->assign('jia', $res);
-        return $this->fetch('qingxiuneed');
-    }
-
-    /*处理完成请休控制器*/
-    public function qingxiuend()
-    {
-        $res = (new Htopjia())->endjia();
-        $this->assign('jia', $res);
-        return $this->fetch('qingxiuend');
-    }
-
-    /*销假请休控制器*/
-    public function qingxiuxiaojia()
-    {
-        $res = (new Htopjia())->xiaojia();
-        $this->assign('jia', $res);
-        return $this->fetch('qingxiuxiaojia');
-    }
 
     /*处理完成请休控制器*/
     public function qingxiurefuse()
@@ -120,55 +58,17 @@ class Personal extends Common
             $res = (new Htopjia())->alljiacount();
             $this->assign('jia', $res);
         }
-        $par = session('admin.id');
         $id = session('admin.id');
-        $restmenu = (new Htopdaka())->findall($par);
+        $restmenu = (new Htopdaka())->findall($id);
         $this->assign('shangban', $restmenu);
         $pos = Db::name('person_dk')->where('dk_nameid', $id)->field('dk_date as start,dk_dkname as title,dk_color as backgroundColor')->select();
-        $poss = Db::name('Htopjia')->where('jia_st', '3')->where('nameid', $id)->field('startdata as start,enddata as end ,jiastatus as title')->select();
+        $poss = Db::name('Htopjia')->where('jia_st','in', '3,4')->where('nameid', $id)->field('startdata as start,enddata as end ,jiastatus as title')->select();
         $pingjie = array_merge($pos, $poss);
         $this->assign('kaoqing', json_encode($pingjie));
 
         return $this->fetch('shenpi');
     }
 
-    /*审批控制器*/
-    public function shenpiname()
-    {
-        if (request()->isPost()) {
-            $data = input('post.');
-            $res = (new Htopjia())->updatashenqing($data);
-            if ($res) {
-                echo 1;
-                exit;
-            } else {
-                echo 2;
-                exit;
-            }
-        }
-        $pmt_id = input('param.pmt_id');
-        $this->assign('jia_id', $pmt_id);
-        return $this->fetch('shenpiname');
-    }
-
-    /*审批控制器*/
-    public function shenpisee()
-    {
-        if (request()->isPost()) {
-            $data = input('post.');
-            $dataid = $data['jiaid'];
-            $adList = Db::name('htopjia')
-                ->where('jia_id', "$dataid")
-                ->find();
-            if ($adList['jia_id']) {
-                echo $adList['jia_guochen'];
-                exit;
-            } else {
-                echo "错误查询";
-                exit;
-            }
-        }
-    }
 
     /*送审控制器*/
     public function songshen()
@@ -237,7 +137,7 @@ class Personal extends Common
     {
         if (request()->isPost()) {
             $data = input('post.');
-            $reson = Db::name('htopjia')->where('jia_id', 20)->field('jia_guochen')->find();
+            $reson = Db::name('htopjia')->where('jia_id', $data['jiaid'])->field('jia_guochen')->find();
             $res = $reson['jia_guochen'] . "</br>3.销假成功，销假时间：" . date("Y-m-d H:i:s");
             $pos = Db::name('htopjia')->where('jia_id', $data['jiaid'])->update(["jia_st" => "4", "jia_guochen" => $res]);
             if ($pos) {
@@ -248,10 +148,45 @@ class Personal extends Common
                 exit;
             }
         }
-        $res = (new Htopjia())->endjia();
-        $xiao = (new Htopjia())->xiaojia();
+        $nameid=session('admin.id');
+        $xiao = Db::name('htopjia')
+            ->alias('a')
+            ->join('person b', 'b.per_id= a.nameid', 'LEFT')
+            ->join('htopkeshi c','c.ks_id= b.jigouid','LEFT')
+            ->where('a.jia_st', '4')
+            ->where('a.nameid',"$nameid")
+            ->order('a.jia_id desc')
+            ->paginate(10);
+        $res = Db::name('htopjia')
+            ->alias('a')
+            ->join('person b', 'b.per_id= a.nameid', 'LEFT')
+            ->join('htopkeshi c','c.ks_id= b.jigouid','LEFT')
+            ->where('a.jia_st', '3')
+            ->where('a.nameid',"$nameid")
+            ->order('a.jia_id desc')
+            ->paginate(10);
+
         $this->assign('jia', $res);
         $this->assign('xiao', $xiao);
         return $this->fetch("xiaojia");
+    }
+
+    /*审批控制器*/
+    public function shenpisee()
+    {
+        if (request()->isPost()) {
+            $data = input('post.');
+            $dataid = $data['jiaid'];
+            $adList = Db::name('htopjia')
+                ->where('jia_id', "$dataid")
+                ->find();
+            if ($adList['jia_id']) {
+                echo $adList['jia_guochen'];
+                exit;
+            } else {
+                echo "错误查询";
+                exit;
+            }
+        }
     }
 }

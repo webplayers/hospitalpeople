@@ -48,6 +48,18 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="__STATIC__/dist/js/pages/dashboard.js"></script>
 <script src="__STATIC__/4.8/WdatePicker.js"></script>
+<script>
+    $(document).on('click', "[data-toggle='fullscreen']", function () {
+        var doc = document.documentElement;
+        if ($(document.body).hasClass("full-screen")) {
+            $(document.body).removeClass("full-screen");
+            document.exitFullscreen ? document.exitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
+        } else {
+            $(document.body).addClass("full-screen");
+            doc.requestFullscreen ? doc.requestFullscreen() : doc.mozRequestFullScreen ? doc.mozRequestFullScreen() : doc.webkitRequestFullscreen ? doc.webkitRequestFullscreen() : doc.msRequestFullscreen && doc.msRequestFullscreen();
+        }
+    });
+</script>
 <!-- AdminLTE for demo purposes -->
 </body>
 </html>

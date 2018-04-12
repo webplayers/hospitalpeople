@@ -3,6 +3,7 @@ namespace app\index\controller;
 
 use app\common\model\Hpeople;
 use app\common\model\Htopdaka;
+use app\common\model\Htoppaiban;
 use think\Controller;
 use think\Db;
 
@@ -32,13 +33,20 @@ class People extends Common
         if (request()->isPost()) {
             $data = input('post.');
             $dat = $data['tsearch'];
+            $jigou=$data['ks_name'];
+            if($dat||$jigou){
             $pos = Db::name('person')
                 ->alias('a')
                 ->join('htopkeshi b', 'b.ks_id= a.jigouid', 'LEFT')
-                ->where('status', '3')
-                ->where('name', 'like', "%$dat%")
+                ->where('a.status', '3')
+                ->where('a.jigouid', "$jigou")
+                ->where('a.name', 'like', "%$dat%")
                 ->paginate(10);
             $this->assign('zs', $pos);
+            }else{
+                $restkeshi = (new Hpeople())->zsgetall("3");
+                $this->assign('zs', $restkeshi);
+            }
         } else {
             $restkeshi = (new Hpeople())->zsgetall("3");
             $this->assign('zs', $restkeshi);
@@ -70,7 +78,8 @@ class People extends Common
             $data['status'] = '1';
             $data['dengji'] = '0';
             $restkeshi = (new Hpeople())->saveone($data);
-            if ($restkeshi) {
+            $paiban = (new Htoppaiban())->savepeople($restkeshi);
+            if ($restkeshi&&$paiban) {
                 echo 1;
                 exit;
             } else {
@@ -104,7 +113,7 @@ class People extends Common
         $id = input('param.user_id');
 //        $pos = Db::name('person_dk')->field('ks_name as label,ks_count as value,ks_color as color,ks_color as highlight')->select();
         $pos = Db::name('person_dk')->where('dk_nameid', $id)->field('dk_date as start,dk_dkname as title,dk_color as backgroundColor')->select();
-        $poss = Db::name('Htopjia')->where('jia_st', '3')->where('nameid', $id)->field('startdata as start,enddata as end ,jiastatus as title')->select();
+        $poss = Db::name('Htopjia')->where('jia_st','in', '3,4')->where('nameid', $id)->field('startdata as start,enddata as end ,jiastatus as title')->select();
         $pingjie = array_merge($pos, $poss);
         $this->assign('kaoqing', json_encode($pingjie));
         $personone = Db::name('person')->where('per_id', $id)->find();
