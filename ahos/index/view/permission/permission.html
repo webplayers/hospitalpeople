@@ -1,0 +1,94 @@
+{include file="common:header" /}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            人员基本信息
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">人员基础信息管理</a></li>
+            <li class="active">人员基础信息</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                <ul id="treeDemo" class="ztree"></ul>
+                </div>
+            </div>
+            <input type="submit" onclick="onCheck()" class="btn btn-primary">
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{include file="common:footer" /}
+<link rel="stylesheet" href="__STATIC__/bower_components/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="__STATIC__/bower_components/ztree/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="__STATIC__/bower_components/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="__STATIC__/bower_components/ztree/js/jquery.ztree.excheck.js"></script>
+<SCRIPT type="text/javascript">
+    <!--
+    var setting = {
+        check: {
+            enable: true,
+            idKey: "id",
+            pIdKey: "pId"
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        }
+    };
+    var zNodes =[
+        {foreach name='quanxian' key='key' item='vo' }
+           { id:"<?php echo $vo['id']; ?>", pId:"<?php echo $vo['pid']; ?>", name:"<?php echo $vo['text']; ?>", checked:"<?php  if($vo['state']){echo 'true';}else{echo 'false';} ?>",open:true},
+        {/foreach}
+    ];
+
+    $(document).ready(function(){
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        setCheck();
+    });
+    //-->
+    function onCheck() {
+        var treeObj = $.fn.zTree.getZTreeObj("treeDemo"), nodes = treeObj
+                .getCheckedNodes(true), v = "";
+        for (var i = 0; i < nodes.length; i++) {
+            v += nodes[i].id + ",";
+            //alert(nodes[i].name); //获取选中节点的名称
+        }
+        var id = {$nameid};
+        $.ajax({
+            //几个参数需要注意一下
+            type: "post",
+            url: "{:url('index/permission/permission')}",
+            dataType: 'text',
+            data: {data:v,id:id},
+            success: function (sd) {
+                console.log(sd);
+                modals.correct(sd);
+                if (sd == '1') {
+                    modals.correct('修改成功');
+                    setInterval("show()", 1000);
+                } else {
+                    modals.error("未改变数据");
+                }
+            },
+            error: function (e, s) {
+                modals.error("错误");
+            }
+        });
+    }
+    function show(){
+        window.location = "{:url('index/permission/index')}";
+    }
+</SCRIPT>

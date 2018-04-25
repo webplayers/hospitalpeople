@@ -26,6 +26,7 @@ class Common extends Controller
         $this->keshis();
         $this->message();
         $this->keshi();
+        $this->keshiid();
     }
     /*左侧菜单栏选项*/
     protected function nbar(){
@@ -51,7 +52,7 @@ class Common extends Controller
         $acc=null;
         foreach ($postsList as $key => $value) {
             // 左侧菜单权限
-            $left = Db::name('hr_leftmenu')->where('pid',$value['id'])->select();
+            $left = Db::name('hr_leftmenu')->where('id','in',$ss)->where('pid',$value['id'])->select();
             if($left){
                 foreach ($left as $v) {
                     $acc[] = $v;
@@ -107,6 +108,12 @@ class Common extends Controller
     protected function keshi(){
         $ks_name = Db::name('htopkeshi')->where('ks_pid','<>','0')->field('ks_id,ks_name')->select();
         $this->assign("ks_name",$ks_name);
+    }
+    /*科室信息*/
+    protected function keshiid(){
+        $jigouid= session('admin.jigouid');
+        $ks_name = Db::name('htopkeshi')->where('ks_id',$jigouid)->field('ks_name')->find();
+        $this->assign("ks_nameid",$ks_name);
     }
 }
 // 应用公共文件

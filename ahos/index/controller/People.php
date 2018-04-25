@@ -60,7 +60,12 @@ class People extends Common
         if (request()->isPost()) {
             $data = input('post.');
             $dat = $data['tsearch'];
-            $pos = Db::name('person')->where('status', '4')->where('name', 'like', "%$dat%")->paginate(10);
+            $pos = Db::name('person')
+                ->alias('a')
+                ->join('htopkeshi b', 'b.ks_id= a.jigouid', 'LEFT')
+                ->where('status','=', '4')
+                ->where('a.name', 'like', "%$dat%")
+                ->paginate(10);
             $this->assign('zs', $pos);
         } else {
             $restkeshi = (new Hpeople())->zsgetall("4");

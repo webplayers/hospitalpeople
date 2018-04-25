@@ -14,6 +14,9 @@ class Index extends Common
     /*主菜单*/
     public function index()
     {
+        if (session('admin.dengji') < 6) {
+            $this->redirect('index/personal/keshiguanli');
+        }
         $restmenu = (new Htopmenu())->getall();
         $this->assign('menu', $restmenu);
         return $this->fetch('index');
@@ -30,12 +33,24 @@ class Index extends Common
     /*岗位列表*/
     public function gangwei()
     {
-        if (request()->isPost()) {
-            $data = input('post.');
-            $restkeshi = (new Htopkeshi())->findone($data['likename']);
-            $this->assign('keshi', $restkeshi);
-        } else {
-            $restkeshi = (new Htopkeshi())->getall();
+            if (request()->isPost()) {
+                $data = input('post.');
+                $likename = $data['likename'];
+                if($likename){
+                    session('admin.likename', $likename);
+                }else{
+                    session('admin.likename', null);
+                }
+                session('admin.likename', $likename);
+                $restkeshi = (new Htopkeshi())->findone($likename);
+                $this->assign('keshi', $restkeshi);
+            } else {
+                $restkeshi = (new Htopkeshi())->getall();
+                $this->assign('keshi', $restkeshi);
+            }
+        if(session('admin.likename')){
+            $likenam=session('admin.likename');
+            $restkeshi = (new Htopkeshi())->findone($likenam);
             $this->assign('keshi', $restkeshi);
         }
         $possun = Db::name('htopkeshi')->sum('ks_count');

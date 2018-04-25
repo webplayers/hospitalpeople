@@ -4,12 +4,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            临聘人员信息录入
+            管理员信息录入
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
-            <li><a href="#">岗位查看</a></li>
-            <li class="active">增加岗位</li>
+            <li><a href="#">管理员列表</a></li>
         </ol>
     </section>
 
@@ -24,7 +23,7 @@
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">姓名</label>
                                     <div class="col-xs-7">
-                                    <input value="测试姓名1" name="name" required="required" type="text" class="form-control" placeholder="请输入姓名">
+                                        <input value="管理员1" name="name" required="required" type="text" class="form-control" placeholder="请输入姓名">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -76,6 +75,16 @@
                                         <input value="13652457487" name="phone" required="required" type="text" class="form-control" placeholder="请输入姓名">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">级别</label>
+                                    <div class="col-xs-7">
+                                        <select name="dengji" class="form-control">
+                                            <option value="6">科室管理员</option>
+                                            <option value="7">总管理员</option>
+                                            <option value="8">超级管理员</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-xs-12 text-center" style="border-top: 1px solid #ddd;padding-top: 10px;">
                                 <button onclick="sub()" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;提交
@@ -91,18 +100,18 @@
 </div>
 <script>
     function show(){
-        window.location = "{:url('index/people/lingpin')}";
+        window.location = "{:url('index/permission/index')}";
     }
     function sub(){
         $.ajax({
             //几个参数需要注意一下
             type: "post",
-            url: "{:url('index/people/lingpientry')}",
+            url: "{:url('index/permission/addadmin')}",
             dataType: 'text',
             data: $('#form1').serialize(),
             success: function (sd) {
                 if (sd == '1') {
-                    modals.correct('申请成功，即将跳转人员列表。。。');
+                    modals.correct('申请成功，即将跳转管理员列表。。。');
                     setInterval("show()", 1000);
                 } else {
                     modals.error("未知原因，申请失败！");

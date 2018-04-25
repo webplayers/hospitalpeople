@@ -72,13 +72,23 @@
                                 <td>{$vo['address']}</td>
                                 <td>{$vo['phone']}</td>
                                 <td>
-                                    <a href="{:url('index/people/gongzi',['user_id'=>$vo['per_id']])}" type="button"
-                                       class="btn btn-info btn-flat">工资信息</a>
-                                    <a href="{:url('index/people/editpeople',['user_id'=>$vo['per_id']])}" type="button"
-                                       class="btn btn-info btn-flat">编辑修改</a>
-                                    <button type="button" class="btn btn-info btn-flat">离职</button>
+                                    <a href="{:url('index/people/gongzi',['user_id'=>$vo['per_id']])}"
+                                       class="btn btn-xs btn-primary btn-addtabs" title="工资信息"><i
+                                            class="fa fa-money"></i></a>
+                                    <a href="{:url('index/people/editpeople',['user_id'=>$vo['per_id']])}"
+                                       class="btn btn-xs btn-success btn-addtabs" title="编辑修改"><i
+                                            class="fa fa-pencil"></i></a>
+                                    <button onclick="modals.confirm('敏感操作，确认离职？', function () {
+modals.info('已离职');
+        });" href="#"
+                                       class="btn btn-xs btn-danger btn-addtabs" title="离职"><i
+                                            class="fa fa-trash"></i></button>
                                     <a href="{:url('index/people/kaoqingtongji',['user_id'=>$vo['per_id']])}"
-                                       class="btn btn-info btn-flat">考勤状况</a>
+                                       class="btn btn-xs btn-success btn-addtabs" title="考勤状况"><i
+                                            class="fa fa-calendar"></i></a>
+                                    <a href="{:url('index/file/index',['user_id'=>$vo['per_id']])}"
+                                       class="btn btn-xs btn-success btn-addtabs" title="合同证照"><i
+                                            class="fa fa-file-image-o"></i></a>
                                 </td>
                             </tr>
                             {/foreach}

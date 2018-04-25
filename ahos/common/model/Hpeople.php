@@ -29,6 +29,7 @@ class Hpeople extends Model
         }
         //3.将用户信息存入到session中
         session('admin.admin_username', $userInfo['name']);
+        session('admin.jigouid', $userInfo['jigouid']);
         session('admin.id', $userInfo['per_id']);
         session('admin.dengji', $userInfo['dengji']);
         return ['valid' => 1, 'msg' => '登录成功'];

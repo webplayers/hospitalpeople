@@ -45,6 +45,7 @@
                                 <th>年龄(自动增长)</th>
                                 <th>通讯地址</th>
                                 <th>联系方式</th>
+                                <th>统计</th>
                             </tr>
                             {foreach name='zs' key='key' item='vo' }
                             <tr>
@@ -55,6 +56,10 @@
                                 <td>{$vo['age']}</td>
                                 <td>{$vo['address']}</td>
                                 <td>{$vo['phone']}</td>
+                                <td>
+                                    <a href="{:url('index/retire/index',['user_id'=>$vo['phone']])}" type="button"
+                                       class="btn btn-info btn-flat">个人信息</a>
+                                </td>
                             </tr>
                             {/foreach}
                             </tbody>
