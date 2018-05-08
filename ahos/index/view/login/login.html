@@ -86,6 +86,7 @@
                         window.location="{:url('index/index/index')}";
                     }else{
                         modals.error(data);
+                        setInterval("location.reload()", 2000);
                     }
                 }
             },

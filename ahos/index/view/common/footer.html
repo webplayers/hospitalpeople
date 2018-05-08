@@ -60,6 +60,33 @@
         }
     });
 </script>
+<script>
+    $(document).ready(function (e) {
+        startTime();
+        function startTime() {
+            var today = new Date();
+            var y = today.getFullYear();
+            var M = today.getMonth()+1;
+            var d = today.getDate();
+            var w = today.getDay();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            var week=['星期天','星期一','星期二','星期三','星期四','星期五','星期六'];
+            // add a zero in front of numbers<10
+            m = checkTime(m);
+            s = checkTime(s);
+            $('#time').html(y+'年'+M+'月'+d+"日 "+h+':'+m+':'+s+' '+week[w]);//可改变格式
+            t = setTimeout(startTime, 500);
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            }
+        }
+    });
+</script>
 <!-- AdminLTE for demo purposes -->
 </body>
 </html>
